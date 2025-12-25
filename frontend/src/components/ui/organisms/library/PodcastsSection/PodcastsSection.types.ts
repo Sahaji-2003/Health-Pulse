@@ -1,5 +1,5 @@
-import { SxProps, Theme } from '@mui/material/styles';
-import { Resource } from '../ResourceCard';
+import type { SxProps, Theme } from '@mui/material/styles';
+import type { Resource } from '../ResourceCard';
 
 /**
  * Props for the PodcastsSection component

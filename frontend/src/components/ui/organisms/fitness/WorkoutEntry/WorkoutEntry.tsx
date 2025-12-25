@@ -131,22 +131,24 @@ export const WorkoutEntry: React.FC<WorkoutEntryProps> = ({
     }));
   };
 
-  const handleTimeChange = (newTime: Dayjs | null) => {
-    setSelectedTime(newTime);
-    if (newTime) {
+  const handleTimeChange = (newTime: unknown) => {
+    const dayjsTime = newTime as Dayjs | null;
+    setSelectedTime(dayjsTime);
+    if (dayjsTime) {
       setFormData((prev) => ({
         ...prev,
-        time: newTime.format('HH:mm'),
+        time: dayjsTime.format('HH:mm'),
       }));
     }
   };
 
-  const handleDateChange = (newDate: Dayjs | null) => {
-    setSelectedDate(newDate);
-    if (newDate) {
+  const handleDateChange = (newDate: unknown) => {
+    const dayjsDate = newDate as Dayjs | null;
+    setSelectedDate(dayjsDate);
+    if (dayjsDate) {
       setFormData((prev) => ({
         ...prev,
-        date: newDate.format('YYYY-MM-DD'),
+        date: dayjsDate.format('YYYY-MM-DD'),
       }));
     }
   };

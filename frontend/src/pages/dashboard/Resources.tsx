@@ -47,16 +47,16 @@ export const Resources = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { topicId } = useParams();
-  
+
   // Determine current view from URL
   const pathParts = location.pathname.split('/').filter(Boolean);
   const currentSection = pathParts[1] || 'articles';
   const isCreatePostView = pathParts[2] === 'create';
   const isTopicDetailView = pathParts[2] === 'topic' && topicId;
-  
+
   // Get active tab from URL
   const activeTab: LibraryTabValue = pathToTab[currentSection] || 'articles';
-  
+
   const [personalLibraryCategory, setPersonalLibraryCategory] = useState('all');
 
   // Resources hooks - these return { resources, pagination } format
@@ -126,8 +126,8 @@ export const Resources = () => {
   const handleResourceClick = useCallback((resource: Resource) => {
     console.log('Resource clicked:', resource.id);
     // TODO: Navigate to resource detail or open external link
-    if (resource.externalUrl) {
-      window.open(resource.externalUrl, '_blank');
+    if (resource.url) {
+      window.open(resource.url, '_blank');
     }
   }, []);
 
@@ -190,11 +190,11 @@ export const Resources = () => {
           forumTopics={forumTopics}
           isLoading={
             activeTab === 'articles' ? isLoadingArticles :
-            activeTab === 'videos' ? isLoadingVideos :
-            activeTab === 'podcasts' ? isLoadingPodcasts :
-            activeTab === 'community' ? isLoadingPosts :
-            activeTab === 'personal' ? isLoadingSavedResources :
-            false
+              activeTab === 'videos' ? isLoadingVideos :
+                activeTab === 'podcasts' ? isLoadingPodcasts :
+                  activeTab === 'community' ? isLoadingPosts :
+                    activeTab === 'personal' ? isLoadingSavedResources :
+                      false
           }
           personalLibraryCategory={personalLibraryCategory}
           onPersonalLibraryCategoryChange={setPersonalLibraryCategory}

@@ -1,5 +1,5 @@
 import apiClient from '../apiClient';
-import type { ApiResponse, PaginatedResponse, VitalSigns, VitalAlert } from '@/types';
+import type { ApiResponse, PaginatedResponse, VitalSigns } from '@/types';
 
 export interface CreateVitalsData {
   bloodPressureSystolic?: number;
@@ -111,8 +111,8 @@ export const vitalsApi = {
    * Since alerts are derived from abnormal vitals, we update the vital record
    */
   markAlertRead: async (id: string): Promise<ApiResponse<VitalSigns>> => {
-    const response = await apiClient.put(`/vitals/${id}`, { 
-      notes: `[Alert acknowledged at ${new Date().toISOString()}]` 
+    const response = await apiClient.put(`/vitals/${id}`, {
+      notes: `[Alert acknowledged at ${new Date().toISOString()}]`
     });
     return response.data;
   },
@@ -125,10 +125,10 @@ export const vitalsApi = {
     date: Date;
     daysAgo: number;
   } | null>> => {
-    const response = await apiClient.get('/vitals', { 
-      params: { 
+    const response = await apiClient.get('/vitals', {
+      params: {
         limit: 1
-      } 
+      }
     });
     const vitals = response.data.data;
     if (vitals && vitals.length > 0 && vitals[0].bloodSugar) {
@@ -136,7 +136,7 @@ export const vitalsApi = {
       const now = new Date();
       const diffTime = Math.abs(now.getTime() - vitalDate.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
+
       return {
         success: true,
         data: {

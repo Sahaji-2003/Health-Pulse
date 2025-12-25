@@ -67,8 +67,9 @@ export const AppointmentScheduleForm: React.FC<AppointmentScheduleFormProps> = (
     setErrors((prev) => ({ ...prev, providerId: undefined }));
   }, []);
 
-  const handleDateChange = useCallback((date: Date | null) => {
-    setFormData((prev) => ({ ...prev, date }));
+  const handleDateChange = useCallback((date: Date | null | unknown) => {
+    // DatePicker can return Date, Dayjs, or null
+    setFormData((prev) => ({ ...prev, date: date as Date | null }));
     setErrors((prev) => ({ ...prev, date: undefined }));
   }, []);
 

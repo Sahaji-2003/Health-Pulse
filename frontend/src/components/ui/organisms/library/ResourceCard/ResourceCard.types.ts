@@ -1,4 +1,4 @@
-import { SxProps, Theme } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 /**
  * Resource type representing a library resource (article, video, podcast)

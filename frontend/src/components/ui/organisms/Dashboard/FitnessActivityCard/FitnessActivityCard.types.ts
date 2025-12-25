@@ -1,4 +1,4 @@
-import { SxProps, Theme } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 
 export interface FitnessHistoryItem {
   /** Date label (e.g., "Today", "Yesterday", "13th Oct") */

@@ -94,7 +94,7 @@ export const useAddComment = () => {
   return useMutation({
     mutationFn: ({ postId, content }: { postId: string; content: string }) =>
       communityApi.addComment(postId, content),
-    onSuccess: (response, { postId }) => {
+    onSuccess: (_, { postId }) => {
       // Invalidate single post query to refetch with new comment
       queryClient.invalidateQueries({ queryKey: ['community', 'post', postId] });
       // Also invalidate posts list to update comment counts

@@ -5,33 +5,14 @@ import type {
   VitalsHistoryViewMode,
   VitalType,
   WeeklyDataPoint,
-  VitalsHistoryData,
 } from './VitalsHistorySection.types';
 import { VitalsHistoryGraphView } from './VitalsHistoryGraphView';
 import { VitalsHistoryTableView } from './VitalsHistoryTableView';
 import { useVitalsHistory } from '../../../../../hooks/useVitals';
 
-// Default weekly data for graph view
-const defaultGraphData: WeeklyDataPoint[] = [
-  { day: 'Mon', value: 72, percentage: 57 },
-  { day: 'Tue', value: 65, percentage: 36 },
-  { day: 'Wed', value: 68, percentage: 44 },
-  { day: 'Thu', value: 72, percentage: 57 },
-  { day: 'Fri', value: 85, percentage: 100, isHighlighted: true },
-  { day: 'Sat', value: 78, percentage: 71 },
-  { day: 'Sun', value: 75, percentage: 61 },
-];
-
-// Default table data for table view
-const defaultTableData: VitalsHistoryData[] = [
-  { id: '1', date: '20 Aug, 2025', value: 60, unit: 'bpm' },
-  { id: '2', date: '20 Aug, 2025', value: 60, unit: 'bpm' },
-  { id: '3', date: '20 Aug, 2025', value: 60, unit: 'bpm' },
-  { id: '4', date: '20 Aug, 2025', value: 60, unit: 'bpm' },
-];
 
 const formatVitalTypeName = (vitalType: string): string => {
-  return vitalType.replace('_', ' ').split(' ').map(word => 
+  return vitalType.replace('_', ' ').split(' ').map(word =>
     word.charAt(0).toUpperCase() + word.slice(1)
   ).join(' ');
 };
@@ -147,24 +128,24 @@ export const VitalsHistorySection: React.FC<VitalsHistorySectionProps> = ({
       // Return empty array to show "no data" state instead of dummy data
       return [];
     }
-    
+
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const weekData: WeeklyDataPoint[] = [];
-    
+
     const last7Days = vitalsHistoryData.data.slice(0, 7).reverse();
-    
+
     for (let i = 0; i < 7; i++) {
       const dayData = last7Days[i];
       if (dayData) {
         const date = new Date(dayData.date);
         const dayName = dayNames[date.getDay()];
         const value = typeof dayData.value === 'string' ? parseFloat(dayData.value) || 0 : dayData.value;
-        
+
         let percentage = 50;
         if (vitalType === 'heart_rate' && typeof value === 'number') {
           percentage = Math.min(100, Math.max(0, ((value - 40) / 80) * 100));
         }
-        
+
         weekData.push({
           day: dayName,
           value,
@@ -179,7 +160,7 @@ export const VitalsHistorySection: React.FC<VitalsHistorySectionProps> = ({
         });
       }
     }
-    
+
     return weekData;
   }, [vitalsHistoryData, vitalType]);
 

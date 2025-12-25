@@ -19,7 +19,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import DownloadIcon from '@mui/icons-material/Download';
 import type { WorkoutHistoryProps, WorkoutHistoryFilter, WorkoutHistoryItem } from './WorkoutHistory.types';
 
@@ -82,9 +82,10 @@ export const WorkoutHistory: React.FC<WorkoutHistoryProps> = ({
     }
   };
 
-  const handleFromDateChange = (newDate: Dayjs | null) => {
-    setFromDateValue(newDate);
-    const dateStr = newDate ? newDate.format('MM/DD/YYYY') : '';
+  const handleFromDateChange = (newDate: unknown) => {
+    const dayjsDate = newDate as Dayjs | null;
+    setFromDateValue(dayjsDate);
+    const dateStr = dayjsDate ? dayjsDate.format('MM/DD/YYYY') : '';
     const newFilters = { ...filters, fromDate: dateStr };
     if (onFilterChange) {
       onFilterChange(newFilters);
@@ -93,9 +94,10 @@ export const WorkoutHistory: React.FC<WorkoutHistoryProps> = ({
     }
   };
 
-  const handleToDateChange = (newDate: Dayjs | null) => {
-    setToDateValue(newDate);
-    const dateStr = newDate ? newDate.format('MM/DD/YYYY') : '';
+  const handleToDateChange = (newDate: unknown) => {
+    const dayjsDate = newDate as Dayjs | null;
+    setToDateValue(dayjsDate);
+    const dateStr = dayjsDate ? dayjsDate.format('MM/DD/YYYY') : '';
     const newFilters = { ...filters, toDate: dateStr };
     if (onFilterChange) {
       onFilterChange(newFilters);

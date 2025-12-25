@@ -122,7 +122,7 @@ export const Vitals = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
-  
+
   // Derive selected tab from URL
   const selectedTab = useMemo((): VitalsTab => {
     const path = location.pathname;
@@ -131,7 +131,7 @@ export const Vitals = () => {
     if (path.endsWith('/reminders')) return 'Reminders and Alerts';
     return 'Dashboard';
   }, [location.pathname]);
-  
+
   // Tab change handler using navigation
   const handleTabChange = useCallback((tab: VitalsTab) => {
     switch (tab) {
@@ -151,7 +151,7 @@ export const Vitals = () => {
   }, [navigate]);
 
   // Fetch user profile data
-  const { profile, isLoading: profileLoading } = useProfile();
+  const { profile } = useProfile();
 
   // Fetch vitals data from backend API
   const {
@@ -217,7 +217,7 @@ export const Vitals = () => {
     setIsDownloadingPdf(true);
     try {
       const blob = await userApi.downloadProfilePdf();
-      
+
       // Create download link
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -225,7 +225,7 @@ export const Vitals = () => {
       link.setAttribute('download', `health_pulse_profile_${new Date().toISOString().split('T')[0]}.pdf`);
       document.body.appendChild(link);
       link.click();
-      
+
       // Cleanup
       link.parentNode?.removeChild(link);
       window.URL.revokeObjectURL(url);

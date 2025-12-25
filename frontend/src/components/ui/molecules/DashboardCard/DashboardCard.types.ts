@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { SxProps, Theme } from '@mui/material';
+import type { ReactNode } from 'react';
+import type { SxProps, Theme } from '@mui/material';
 
 export interface DashboardCardProps {
   /** Card title displayed in the header */

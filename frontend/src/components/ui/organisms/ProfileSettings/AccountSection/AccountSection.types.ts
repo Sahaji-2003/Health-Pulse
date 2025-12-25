@@ -2,8 +2,8 @@ export interface ProfileFormData {
   firstName: string;
   lastName: string;
   age: string;
-  gender: string;
-  bloodGroup: string;
+  gender: 'male' | 'female' | 'other' | 'prefer-not-to-say' | '';
+  bloodGroup: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-' | '';
   height: string;
   weight: string;
   currentPassword: string;

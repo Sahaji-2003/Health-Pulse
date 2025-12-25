@@ -1,4 +1,4 @@
-import { BoxProps } from '@mui/material/Box';
+import type { BoxProps } from '@mui/material/Box';
 
 export type CardVariant = 'elevated' | 'outlined' | 'filled';
 export type CardPadding = 'none' | 'small' | 'medium' | 'large';
