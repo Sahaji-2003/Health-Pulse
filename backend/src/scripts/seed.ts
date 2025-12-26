@@ -827,7 +827,7 @@ const seedDatabase = async () => {
     await Reminder.deleteMany({});
     await VitalSigns.deleteMany({});
     await FitnessActivity.deleteMany({});
-    await User.deleteMany({});
+    // await User.deleteMany({});
     console.log('Cleared existing data (including all users)');
 
     // Insert resources
